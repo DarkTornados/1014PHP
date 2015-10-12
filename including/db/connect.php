@@ -1,0 +1,1 @@
+Ovo je pseudo kod za konekciju na bazu

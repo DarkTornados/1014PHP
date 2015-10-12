@@ -1,0 +1,10 @@
+<?php
+//1. create a folder SUBFOLDER
+
+mkdir('SUBFOLDER');
+
+//2. copy work.txt from root to SUBFOLDER
+//3. create a subfolder inside SUBFOLDER called TEST
+//4. copy work.txt to TEST as well but change its name to work2.txt
+//5. delete all files and folders from SUBFOLDER
+
