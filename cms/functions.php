@@ -13,6 +13,8 @@ function create_new_post() {
 	$id_user = $_POST['id_user'];
 	$sql = "INSERT INTO posts SET title='$title', content = '$content', image = '$image', date = '$date', id_user = '$id_user'";
 	mysql_query($sql);
+	header('Location: ?action=read');
+
 }
 
 function upload_image() {
@@ -22,14 +24,37 @@ function upload_image() {
 	return $file;
 }
 
-function get_all_authors_dropdown() {
+function get_all_authors_dropdown($selection_id = NULL) {
 	$sql = "SELECT * FROM users";
     $result = mysql_query($sql);
-
+ 
     while($row = mysql_fetch_assoc($result)) {
+
+    	     $selected = ($selection_id && $selection_id == $row['id']) ? "selected" : "";
+
         ?>
-          <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?> <?php echo $row['lastname'] ?></option>
+          <option value="<?php echo $row['id'] ?>" <?php echo $selected ?>><?php echo $row['name'] ?> <?php echo $row['lastname'] ?></option>
 
         <?php
     }
+}
+
+function strip_content($string, $characters = 120) {
+
+//	$len = strlen($string);
+/*	if($len > $characters ){
+		$content = substr($string, 0, $characters) . "...";
+	} else {
+		$content = $string;
+	}*/
+	
+	return (strlen($string) > $characters ) ? substr($string, 0, $characters) . "..." : $string;
+
+}
+
+function display_image($image) {
+
+	$result =  ($image) ? "<img class='img_posts' src='uploads/$image'>" : "";
+
+	return $result;
 }

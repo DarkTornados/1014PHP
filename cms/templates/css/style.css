@@ -1,0 +1,19 @@
+.table-posts thead th:nth-child(3) {
+	width: 300px;
+}
+
+.table-posts thead th:nth-child(5) {
+	width: 150px;
+}
+
+.table-posts thead th:nth-child(6) {
+	width: 130px;
+}
+
+.table-posts thead th:last-child {
+	width: 130px;
+}
+
+.img_posts {
+	width: 100px;
+}

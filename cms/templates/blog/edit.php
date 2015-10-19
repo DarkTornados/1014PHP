@@ -1,7 +1,14 @@
 <?php 
   if($_POST) {
-    create_new_post();
+    //create_new_post();
   }
+
+
+  $sql = "SELECT * FROM posts WHERE id = '" . $_GET['id'] . "'";
+  $result = mysql_query($sql);
+  $post = mysql_fetch_assoc($result);
+
+
  ?>
 
  <div>
@@ -13,13 +20,13 @@
 <fieldset>
 <input type="hidden" name="id_user" value="1">
 <!-- Form Name -->
-<legend>Create Blog Post</legend>
+<legend>Edit Blog Post</legend>
 
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="title">Title</label>  
   <div class="col-md-8">
-  <input id="title" name="title" type="text" placeholder="" class="form-control input-md">
+  <input id="title" name="title" type="text" placeholder="" class="form-control input-md" value="<?php echo $post['title'] ?>">
     
   </div>
 </div>
@@ -28,7 +35,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="content">Content</label>
   <div class="col-md-4">                     
-    <textarea class="form-control" id="content" name="content"></textarea>
+    <textarea class="form-control" id="content" name="content"><?php echo $post['content'] ?></textarea>
   </div>
 </div>
 
@@ -36,7 +43,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="date">Date</label>  
   <div class="col-md-4">
-  <input id="date" name="date" type="text" placeholder="" class="form-control input-md">
+  <input id="date" name="date" type="text" placeholder="" class="form-control input-md" value="<?php echo $post['date'] ?>">
     
   </div>
 </div>
@@ -45,6 +52,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="image">Image</label>
   <div class="col-md-4">
+  <?php echo display_image($post['image']) ?>
     <input id="image" name="image" class="input-file" type="file">
   </div>
 </div>
@@ -56,7 +64,7 @@
   <div class="col-md-4">
     <select name="id_user" id="">
     <?php 
-      get_all_authors_dropdown();
+      get_all_authors_dropdown($post['id_user']);
      ?>
       
     </select>
